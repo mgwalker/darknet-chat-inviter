@@ -1,1 +1,105 @@
-hi
+
+<html>
+<head>
+	<title>darknet chat</title>
+	<style type="text/css">
+		body {
+			background: black;
+			color: white;
+			font-family: sans-serif;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			-webkit-justify-content: center;
+		}
+
+		.container div, .container p {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+    #yay, #error {
+      background: #981b1e;
+      color: white;
+      padding: 0.5em;
+      font-size: 1em;
+      border-radius: 1em;
+      display: none;
+    }
+
+    #yay {
+      background: #2e8540;
+    }
+
+    #yay.show, #error.show {
+      display: inline;
+    }
+
+    button {
+      background: #0071bc;
+      color: white;
+      border: 0;
+      border-radius: 3px;
+      font-size: 1.5em;
+      padding: 0.5em;
+    }
+
+    button:hover {
+      background: #205493;
+    }
+
+    label {
+      display: block;
+    }
+
+    input {
+      font-size: 1.25em;
+      width: 20em;
+    }
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div>
+			<h1>darknet chat has moved to Slack!</h1>
+			Want to join us in our new home?  Click the stats thingy below
+			to get yourself an invite!
+		</div>
+
+    <span id="yay"></span>
+
+    <div id="form">
+      <p><span id="error" class=""></span></p>
+      <p>
+        <label for="email">Email address</label>
+        <input id="email" type="email">
+      </p>
+      <p>
+        <button tabindex="0">Get invite</button>
+      </p>
+    </div>
+	</div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('button').click(function() {
+        $.ajax('https://9i75uli883.execute-api.us-west-2.amazonaws.com/prod/darknetchat-inviter?email=' + $('input#email').val(), {
+          success: function() {
+            $("#form").remove();
+            $("#yay").text('Yay, your invitation is on its way!');
+            $("#yay").addClass('show');
+          },
+          error: function(xhr) {
+            $("#error").text(JSON.parse(xhr.responseText).message);
+            $("#error").addClass('show');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
