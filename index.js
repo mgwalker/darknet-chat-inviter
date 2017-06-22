@@ -35,6 +35,6 @@ module.exports.inviter = (e, context, callback) => {
       }
     }
 
-    callback(null, { statusCode: statusCode, body: JSON.stringify(output) });
+    callback(null, { statusCode: statusCode, headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify(output) });
   });
 };
