@@ -1,0 +1,38 @@
+# Welcome to serverless. Read the docs
+# https://serverless.com/framework/docs/
+
+# Serverless.yml is the configuration the CLI
+# uses to deploy your code to your provider of choice
+
+# The `service` block is the name of the service
+service: darknetchat-inviter
+
+# The `provider` block defines where your service will be deployed
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+# The `functions` block defines what code to deploy
+functions:
+  darknetchat-inviter:
+    name: darknetchat-inviter
+    description: Invite folks to darknet chat on Slack
+    handler: index.inviter
+    environment:
+      SLACK_TOKEN: ${env:SLACK_TOKEN}
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: darknetchat-inviter
+          method: get
+          cors: true
+
+# Clean up older versions of the function; keep around
+# the last for rollback, just in case
+custom:
+  prune:
+    automatic: true
+    number: 1
+
+plugins:
+  - serverless-prune-plugin

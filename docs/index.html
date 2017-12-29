@@ -87,7 +87,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $('button').click(function() {
-        $.ajax('https://9i75uli883.execute-api.us-west-2.amazonaws.com/prod/darknetchat-inviter?email=' + $('input#email').val(), {
+        $.ajax('https://i6wcwjpmq0.execute-api.us-west-2.amazonaws.com/production/darknetchat-inviter?email=' + $('input#email').val(), {
           success: function() {
             $("#form").remove();
             $("#yay").text('Yay, your invitation is on its way!');
