@@ -23,6 +23,11 @@ functions:
           path: darknetchat-inviter
           method: get
           cors: true
+          request:
+            parameters:
+              querystring:
+                email: true
+
 
 # Clean up older versions of the function; keep around
 # the last for rollback, just in case
